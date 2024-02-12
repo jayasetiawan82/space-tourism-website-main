@@ -529,6 +529,7 @@ body {
 .grid-container--destination > picture {
     grid-area: image;
     max-width: 60%;
+    align-self: start;
 }
 
 .grid-container--crew > picture {
@@ -651,6 +652,7 @@ body {
 
     .grid-container--crew > picture {
         align-self: end;
+        max-width: 100%;
     }
     .grid-container--crew > .dot-indicators {
         justify-self: start;
@@ -658,5 +660,5 @@ body {
 }
 
 [role="tab"]:focus {
-    color: red;
+    color: var(--clr-white);
 }

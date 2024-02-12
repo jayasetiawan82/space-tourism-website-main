@@ -1,66 +1,64 @@
 const tabList = document.querySelector('[role="tablist"]');
 const tabs = tabList.querySelectorAll('[role="tab"]');
 
-tabList.addEventListener('keydown', changeTabsFocus)
+tabList.addEventListener("keydown", changeTabFocus);
 
 tabs.forEach((tab) => {
-    tab.addEventListener("click", changeTabPanel)
-})
-
+  tab.addEventListener("click", changeTabPanel);
+});
 
 let tabFocus = 0;
+function changeTabFocus(e) {
+  const keydownLeft = 37;
+  const keydownRight = 39;
 
-function changeTabsFocus(e) {
-    const keyDownLeft = 37;
-    const keyDownRight = 39;
+  if (e.keyCode === keydownLeft || e.keyCode === keydownRight) {
+    tabs[tabFocus].setAttribute("tabindex", -1);
 
- // change the tabindex of the current tab to -1
-    if(e.keyCode === keyDownLeft || e.keyCode === keyDownRight) {
-        tabs[tabFocus].setAttribute("tabindex", -1)
-    }
-
-// if the right key is pushed, move to the next tab on the right
-    if(e.keyCode === keyDownRight) {
-        tabFocus++
-        if(tabFocus >= tabs.length) {
-            tabFocus = 0
-        }
-    } 
-
-// if the left key is pushed, move to the next tab on the left
-    if(e.keyCode === keyDownLeft) {
-        tabFocus--
-       if(tabFocus < 0) {
-        tabFocus = tabs.length -1
-       }
+    if (e.keyCode === keydownRight) {
+      tabFocus++;
+      if (tabFocus >= tabs.length) {
+        tabFocus = 0;
+      }
+    } else {
+      tabFocus--;
+      if (tabFocus < 0) {
+        tabFocus = tabs.length - 1;
+      }
     }
 
     tabs[tabFocus].setAttribute("tabindex", 0);
-    tabs[tabFocus].focus()
+    tabs[tabFocus].focus();
+  }
 }
 
-// change the article or the information
-
 function changeTabPanel(e) {
-    const targetTab = e.target
-    const targetPanel = targetTab.getAttribute("aria-controls")
-    const targetImage = targetTab.getAttribute("data-image");
+  const targetTab = e.target;
+  const targetPanel = targetTab.getAttribute("aria-controls");
+  const targetImage = targetTab.getAttribute("data-image");
 
-    const tabContainer = targetTab.parentNode
-    const mainContainer = tabContainer.parentNode
+  const tabContainer = targetTab.parentNode;
+  const mainContainer = tabContainer.parentNode;
 
-    // underline/highlight change 
-    tabContainer.querySelector('[aria-selected="true"]').setAttribute("aria-selected", false)
+  tabContainer
+    .querySelector('[aria-selected="true"]')
+    .setAttribute("aria-selected", false);
 
-    targetTab.setAttribute("aria-selected", true)
-    
+  targetTab.setAttribute("aria-selected", true);
 
-    mainContainer.querySelectorAll("[role=tabpanel]").forEach((panel) => panel.setAttribute("hidden", true))
+  hideContent(mainContainer, '[role="tabpanel"]');
+  showContent(mainContainer, [`#${targetPanel}`]);
 
-    mainContainer.querySelector([`#${targetPanel}`]).removeAttribute('hidden');
-    
-    // hiding the images 
-    mainContainer.querySelectorAll("picture").forEach((picture) => picture.setAttribute("hidden", true))
-    mainContainer.querySelector([`#${targetImage}`]).removeAttribute('hidden');
+  hideContent(mainContainer, "picture");
+  showContent(mainContainer, [`#${targetImage}`]);
+}
 
+function hideContent(parent, content) {
+  parent
+    .querySelectorAll(content)
+    .forEach((item) => item.setAttribute("hidden", true));
+}
+
+function showContent(parent, content) {
+  parent.querySelector(content).removeAttribute("hidden");
 }
