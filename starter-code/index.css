@@ -507,6 +507,13 @@ body {
     padding-bottom: 4rem;
 }
 
+.grid-container-no-padding {
+    text-align: center;
+    display: grid;
+    place-items: center;
+    padding-bottom: 4rem;
+}
+
 .grid-container p:not([class]) {
     max-width: 50ch;
 }
@@ -607,6 +614,31 @@ body {
     grid-area: tabs;
 }
 
+.technology-page-wrapper {
+    background: url(assets/technology/background-technology-mobile.jpg);
+    background-size: cover;
+}
+
+.technology-btn > button {
+    cursor: pointer;
+    border: 2px solid white;
+    padding: 1em 1.5em;
+    border-radius: 60%;
+    background-color: transparent;
+    color: var(--clr-white);
+}
+
+.technology-btn > button:hover {  
+  color: black;
+  background-color: white;
+}
+
+.img-big-sceen {
+    display: none;
+}
+
+
+
 @media (min-width: 35em) {
     .numbered-title {
         justify-self: start;
@@ -627,18 +659,11 @@ body {
             'image';
     }
 
-    .grid-container--technology {
-        padding-bottom: 0;
-        grid-template-areas: 
-            'title'
-            'content'
-            'tabs'
-            'image';
+
+    .technology-page-wrapper {
+        background: url(assets/technology/background-technology-tablet.jpg);
     }
 
-    .grid-container--technology > .tab-list {
-        flex-direction: column;
-    }
 }
 
 @media (min-width: 45em) {
@@ -673,10 +698,17 @@ body {
     .grid-container--technology {
         justify-items: start;
         align-content: start;
-        grid-template-areas: 
-            '. title title .'
-            '. tabs images  .'
-            '. image content .';
+        gap: 3em;
+        padding-left: 2em;
+        text-align: left;
+        grid-template-areas:
+        '. title title .'
+        'tabs content image .'
+       'tabs content image .' ;
+    }
+
+    .grid-container--technology > .tab-list {
+        flex-direction: column;
     }
 
     .grid-container--destination > picture {
@@ -701,6 +733,19 @@ body {
     }
     .grid-container--crew > .dot-indicators {
         justify-self: start;
+    }
+
+    .technology-page-wrapper {
+        background: url(assets/technology/background-technology-desktop.jpg);
+        background-size: cover;
+    }
+
+    .img-big-sceen {
+        display: block;
+    }
+
+    .img-small-sceen {
+        display: none;
     }
 }
 
