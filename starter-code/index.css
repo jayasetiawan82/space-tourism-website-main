@@ -432,6 +432,8 @@ select {
 }
 
 
+
+
 /* ----------------------------- */
 /* Page specific background      */
 /* ----------------------------- */
@@ -628,7 +630,12 @@ body {
     color: var(--clr-white);
 }
 
-.technology-btn > button:hover {  
+.technology-details p {
+    max-width: 25em;
+}
+
+.technology-btn > button:hover,
+.technology-btn > button:focus {  
   color: black;
   background-color: white;
 }
@@ -637,6 +644,10 @@ body {
     display: none;
 }
 
+.technology-btn > [aria-selected="true"] {
+    color: black;
+    background-color: white; 
+}
 
 
 @media (min-width: 35em) {
@@ -704,7 +715,7 @@ body {
         grid-template-areas:
         '. title title .'
         'tabs content image .'
-       'tabs content image .' ;
+        'tabs content image .';
     }
 
     .grid-container--technology > .tab-list {
