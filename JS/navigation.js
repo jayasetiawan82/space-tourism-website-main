@@ -1,11 +1,14 @@
-const visiblity = nav.getAttribute("data-visible") === "true";
+// Assuming you have the necessary elements defined
+const navToggle = document.querySelector(".mobile-nav-toggle");
+const nav = document.getElementById("primary-navigation");
 
-// if the nav is closed, open it
-if (!visiblity) {
-    nav.setAttribute("data-visible", "true");
-    navToggle.setAttribute("aria-expanded", "true");
-} else {
-    // if the nav is open, close it
-    nav.setAttribute("data-visible", "false");
-    navToggle.setAttribute("aria-expanded", "false");
-}
+navToggle.addEventListener("click", function () {
+  const visibility = nav.getAttribute("data-visible") === "true";
+
+  // Toggle visibility
+  nav.setAttribute("data-visible", visibility ? "false" : "true");
+  navToggle.setAttribute("aria-expanded", visibility ? "false" : "true");
+});
+
+
+
